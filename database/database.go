@@ -3,7 +3,7 @@ package database
 import (
 	"context"
 	"multiprovider/database/driver"
-	muxutil "multiprovider/internal/muxutil"
+	"multiprovider/internal/muxutil"
 )
 
 // DbClient ...

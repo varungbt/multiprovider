@@ -5,13 +5,12 @@ import (
 	"fmt"
 	"multiprovider/database"
 	"multiprovider/database/driver"
-	"os"
 
 	"cloud.google.com/go/datastore"
 )
 
 // Provider is google
-const Provider = "google"
+const Provider = "azure"
 
 func init() {
 	database.DefaultProviderMux().RegisterDbClient(Provider, new(datastoreConnOpener))
@@ -30,16 +29,9 @@ type datastoreConnOpener struct {
 
 func (co *datastoreConnOpener) OpenConnection(ctx context.Context) (*database.DbClient, error) {
 
-	project := os.Getenv("GOOGLE_CLOUD_PROJECT")
-	client, err := datastore.NewClient(ctx, project)
-
-	if err != nil {
-		return nil, err
-	}
-
 	datastoreClient := &datastoreDbClient{
 		kind:   "converter-jobs",
-		client: client,
+		client: nil,
 	}
 
 	return database.NewDbClient(datastoreClient), nil
@@ -48,7 +40,7 @@ func (co *datastoreConnOpener) OpenConnection(ctx context.Context) (*database.Db
 
 // RegisterJob registers a job in google cloud datastore
 func (jd *datastoreDbClient) RegisterJob(jobID string, jobType string) bool {
-	fmt.Println("Registering a job in Google Cloud datastore ")
+	fmt.Println("Registering a job in Azure Cosmosdb ")
 	return true
 }
 
