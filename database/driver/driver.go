@@ -6,8 +6,8 @@ type Job struct {
 	Type  string
 }
 
-// JobDatabase  is a interface to be implemented by every cloud provider
-type JobDatabase interface {
+// DbClient  is a interface to be implemented by every cloud provider
+type DbClient interface {
 	RegisterJob(jobID string, jobType string) bool
 
 	PutJob(jobID string) bool
